@@ -1,4 +1,9 @@
 body {
-  background-color: #FF0000;
-  color: #FF0000;
+  background-color: red;
+}
+h1 {
+  color: green;
+}
+p {
+  color: green;
 }
