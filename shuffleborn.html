@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShuffleBorn - Strategic Card Game</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffd700;
+            --secondary-color: #8b4513;
+            --bg-dark: #1a0f00;
+            --text-light: #fff5e6;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle, #2a1f00 0%, #0d0800 100%);
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(139, 69, 19, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(139, 69, 19, 0.2), rgba(0, 0, 0, 0.4));
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        button {
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape" style="width: 100px; height: 100px; left: 10%; top: 20%;"></div>
+            <div class="shape" style="width: 150px; height: 150px; left: 80%; top: 60%;"></div>
+            <div class="shape" style="width: 80px; height: 80px; left: 50%; top: 80%;"></div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">ShuffleBorn</div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gameplay">Gameplay</a></li>
+                <li><a href="#download">Play Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section hero">
+            <h1 style="font-size: 4rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">ShuffleBorn</h1>
+        </section>
+
+        <section class="section" id="overview">
+            <h2>Welcome to ShuffleBorn</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Strategic Card Combat</h3>
+                    <p>Enter a world where strategy meets chance in this innovative deck-building game. Command powerful creatures and cast devastating spells in your quest for victory.</p>
+                </div>
+                <div class="card">
+                    <h3>Dynamic Gameplay</h3>
+                    <p>Every match is unique with procedurally generated challenges and endless deck combinations. Adapt your strategy and outsmart your opponents.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <h2>Key Features</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="skill-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>200+ Unique Cards</h3>
+                    <p>Build your deck from an extensive collection of cards with unique abilities and synergies.</p>
+                </div>
+                <div class="card">
+                    <div class="skill-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Multiplayer Battles</h3>
+                    <p>Challenge other players in real-time battles and prove your strategic prowess.</p>
+                </div>
+                <div class="card">
+                    <div class="skill-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Ranked Mode</h3>
+                    <p>Climb the competitive ladder and earn rewards as you progress through the ranks.</p>
+                </div>
+                <div class="card">
+                    <div class="skill-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3>Random Events</h3>
+                    <p>Experience dynamic gameplay with unexpected events that keep every match exciting.</p>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; color: #999; margin-top: 1rem; text-align: center;">
+                * The features listed above represent our development roadmap. Current version features may vary. Please check the latest release notes for available features.
+            </p>
+        </section>
+
+        <section class="section" id="gameplay">
+            <h2>Gameplay Mechanics</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3>Deck Building</h3>
+                    <p>Create powerful combinations from hundreds of cards. Each deck tells a story of strategy and skill.</p>
+                </div>
+                <div class="card">
+                    <h3>Battle System</h3>
+                    <p>Engage in tactical turn-based combat with unique resource management and special abilities.</p>
+                </div>
+                <div class="card">
+                    <h3>Progression</h3>
+                    <p>Unlock new cards, climb the ranks, and become a legendary ShuffleBorn master.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="download">
+            <h2>Start Your Journey</h2>
+            <div class="card" style="text-align: center;">
+                <h3>Play ShuffleBorn Now</h3>
+                <p>Available on itch.io for web and desktop</p>
+                <button style="margin-top: 1rem;" class="button" onclick="window.open('https://itch.io/', 'blank')">
+                    <span style="color: var(--text-light); text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-play"></i>&nbsp;Play Now
+                    </span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Create random floating animations for shapes
+        document.addEventListener('DOMContentLoaded', () => {
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach(shape => {
+                // Random starting position
+                shape.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+                
+                // Random animation duration between 10 and 20 seconds
+                const duration = 10 + Math.random() * 10;
+                shape.style.animation = `float ${duration}s infinite ease-in-out`;
+                
+                // Random delay for each shape
+                shape.style.animationDelay = `${Math.random() * -20}s`;
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add hover effects to cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
