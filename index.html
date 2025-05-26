@@ -644,9 +644,9 @@
                 <h3>Send a Message</h3>
                 <form id="contactForm">
                     <div style="display: grid; gap: 1rem;">
-                        <input type="text" class="search-input" placeholder="Your Name" required>
-                        <input type="email" class="search-input" placeholder="Your Email" required>
-                        <textarea class="search-input" placeholder="Your Message" rows="5" required style="resize: vertical;"></textarea>
+                        <input type="text" name="name" class="search-input" placeholder="Your Name" required>
+                        <input type="email" name="email" class="search-input" placeholder="Your Email" required>
+                        <textarea name="message" class="search-input" placeholder="Your Message" rows="5" required style="resize: vertical;"></textarea>
                         <button type="submit" class="button">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
@@ -771,40 +771,35 @@
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const submitBtn = contactForm.querySelector('button');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-
-            // Collect form data
             const formData = new FormData(contactForm);
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim(); 
+            const message = formData.get('message').trim();
+
+            // Basic validation
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Sanitize message content
+            const sanitizedMessage = message
+                .replace(/[<>]/g, '') // Remove HTML tags
+                .replace(/(\r\n|\n|\r)/gm, ' '); // Replace newlines
 
             try {
-                const response = await fetch('/contact.php', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                    submitBtn.style.background = 'var(--success)';
-                    setTimeout(() => {
-                        contactForm.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.style.background = '';
-                        submitBtn.disabled = false;
-                    }, 3000);
-                } else {
-                    throw new Error('Submission failed');
-                }
+                const mailtoUrl = `mailto:nathanielhenrycole@icloud.com?subject=Portfolio Contact: ${encodeURIComponent(name)}&body=${encodeURIComponent(sanitizedMessage)}%0D%0A%0D%0AFrom: ${encodeURIComponent(name)}%0D%0AEmail: ${encodeURIComponent(email)}`;
+                window.location.href = mailtoUrl;
+                contactForm.reset();
             } catch (err) {
-                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error!';
-                submitBtn.style.background = 'var(--error)';
-                setTimeout(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.background = '';
-                    submitBtn.disabled = false;
-                }, 3000);
+                alert('There was an error sending your message. Please try again.');
             }
         });
 
